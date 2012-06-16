@@ -1,0 +1,129 @@
+<html>
+<head>
+	<title>Homeless Hack Day - API</title>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<link href="type.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+	<section id="wrapper">
+    <header>
+      <h1>Homeless Hack Day - API</h1>
+    </header>
+<meta name="viewport" content="width=620" />
+
+
+    <article>
+      <span id="status"></span>
+    </article>
+    <h2 class="la-heading"></h2>
+    <div id="info">
+    </div>
+
+
+
+
+</section>
+</body>
+
+<script>
+function success(position) {
+
+	/*var data = {"local_authority":"Bexley","services":[{"_id":"4fdca63d1e4ce33cf9000012","address":"Grassington Road  Sidcup DA14 6BY","email":"info@ageconcernbexley.org.uk","local_auth_id":"4fdc967b1e4ce3379c00017d","name":"Age UK - Bexley","service_offered":"Range of services for older people  including information and advice, care brokerage service, day centres, drop-in services and advocacy. Befriending service. Handyperson scheme. Wheelchair loan service.","service_type":"advice","tel":null,"website":"www.ageuk.org.uk/bexley"},{"_id":"4fdca63d1e4ce33cf900003b","address":"298 Broadway  Bexleyheath DA6 8AH","email":null,"local_auth_id":"4fdc967b1e4ce3379c00017d","name":"Blenheim CDP: Bexley Nexus Drug and Alcohol Team","service_offered":"Range of and drug/alcohol services for people over the age of 18 who require structured treatment.","service_type":"advice","tel":null,"website":"www.blenheimcdp.org.uk"},{"_id":"4fdca63d1e4ce33cf900003c","address":"Civic OfficesBroadway Bexleyheath DA6 7LB","email":null,"local_auth_id":"4fdc967b1e4ce3379c00017d","name":"LB Bexley Social Services - Civic Offices","service_offered":"Initial contact point for information about the full range of social services in Bexley. Childcare team for the east of the borough. Assessments for home care.","service_type":"advice","tel":null,"website":"www.bexley.gov.uk"},{"_id":"4fdca63d1e4ce33cf9000064","address":"Care CentralCivic OfficesThe BroadwayBexleyheathKentDA6 7LB","email":"screeners@bexley.gov.uk","local_auth_id":"4fdc967b1e4ce3379c00017d","name":"LB Bexley Social Services","service_offered":"Range of social services for adults in London Borough of Bexley.","service_type":"advice","tel":null,"website":"www.bexley.gov.uk"},{"_id":"4fdca63d1e4ce33cf9000065","address":"Southlake CentreSeacourt Road London SE2 9XB","email":null,"local_auth_id":"4fdc967b1e4ce3379c00017d","name":"LB Bexley Social Services - West Child Care Team","service_offered":"Range of social services for children and families in the west of the borough.","service_type":"advice","tel":null,"website":"www.bexley.gov.uk"},{"_id":"4fdca63d1e4ce33cf9000098","address":"4 Cross Street  ErithKentDA8 1AB","email":null,"local_auth_id":"4fdc967b1e4ce3379c00017d","name":"Cross Street Law Centre","service_offered":"Legal advice and representation on housing, welfare benefits, debt and employment.","service_type":"advice","tel":null,"website":"www.cslawcentre.org.uk"},{"_id":"4fdca63e1e4ce33cf900015b","address":"8 Brampton Road  Bexleyheath DA7 4HB","email":null,"local_auth_id":"4fdc967b1e4ce3379c00017d","name":"Bexleyheath CAB","service_offered":"Advice and information on a range of issues, including benefits, consumer, housing, debt and employment rights. Two outreach services in Sidcup.","service_type":"advice","tel":null,"website":null},{"_id":"4fdca63e1e4ce33cf90001c3","address":"50 Pier Road  Erith DA8 1TA","email":"advice@erithcab.org.uk","local_auth_id":"4fdc967b1e4ce3379c00017d","name":"Erith CAB","service_offered":"Advice and information on a range of issues, including housing, benefits, debt, employment rights.","service_type":"advice","tel":null,"website":"www.erithcab.org.uk"},{"_id":"4fdca63f1e4ce33cf90002f4","address":"Erith Health Centre50 Pier Road ErithKentDA8 1RQ","email":null,"local_auth_id":"4fdc967b1e4ce3379c00017d","name":"Signpost","service_offered":"Substance misuse treatment including community detox, needle and syringe exchange.","service_type":"advice","tel":null,"website":null},{"_id":"4fdca63e1e4ce33cf9000144","address":"Westminster House186-194 Broadway Bexleyheath DA6 7BB","email":null,"local_auth_id":"4fdc967b1e4ce3379c00017d","name":"Jobcentre Plus - Bexleyheath","service_offered":"Combined jobsearch and benefits service for people of working age. Personal advisers assist with jobsearch activities and benefits claims. Access to Jobpoint terminals for information on job vacancies. Part of the Department for Work and Pensions' Jobcentre Plus network.","service_type":"advice","tel":null,"website":null},{"_id":"4fdca63e1e4ce33cf900021f","address":"Bexley Civic OfficesBroadway Bexleyheath DA6 7LB","email":null,"local_auth_id":"4fdc967b1e4ce3379c00017d","name":"LB Bexley - Prevention & Assessment Team","service_offered":"Advice and information to anyone in the borough worried about losing their home, with the aim of preventing homelessness. Offer advice on mortgage and rent arrears and can liaise with landlords tp protect the rights of tenants. Advice and assitance with renting privately, including the Rent Direct scheme. Information on going on the council's housing register. Out of hours phone 020 8303 7171.","service_type":"advice","tel":null,"website":"www.bexley.gov.uk"},{"_id":"4fdca63e1e4ce33cf9000220","address":"Bexley Civic OfficesBroadway Bexleyheath DA6 7LB","email":"customer.services@bexley.gov.uk","local_auth_id":"4fdc967b1e4ce3379c00017d","name":"LB Bexley Contact Centre Reception - Bexleyheath","service_offered":"General information on all council and local services.","service_type":"advice","tel":"012345 123456","website":"www.bexley.gov.uk"},{"_id":"4fdca63f1e4ce33cf90002ea","address":"Probation UnitNorwich Place Bexleyheath DA6 7ND","email":null,"local_auth_id":"4fdc967b1e4ce3379c00017d","name":"London Probation Trust - Bexleyheath","service_offered":"Probation office for offenders living in London Borough of Bexley. Community Supervision team.","service_type":"hostel","tel":null,"website":"www.london-probation.org.uk"}]};*/
+
+  var s = document.querySelector('#status');
+
+  if (s.className == 'success') {
+    // not sure why we're hitting this twice in FF, I think it's to do with a cached result coming back
+    return;
+  }
+
+
+  s.className = 'success';
+  var mapcanvas = document.createElement('div');
+  mapcanvas.id = 'mapcanvas';
+  mapcanvas.style.height = '400px';
+  mapcanvas.style.width = '560px';
+
+  document.querySelector('article').appendChild(mapcanvas);
+
+  var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+  var myOptions = {
+    zoom: 15,
+    center: latlng,
+    mapTypeControl: false,
+    navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+
+  var map = new google.maps.Map(document.getElementById("mapcanvas"), myOptions);
+
+  var marker = new google.maps.Marker({
+      position: latlng,
+      map: map
+  });
+
+
+
+ var info = "<h3>Advice</h3>";
+ var hostels = "<h3>Hostels</h3>";
+
+
+
+  var url = "http://homelesslink.local/local_authorities.json?lat="+position.coords.latitude+"&lon="+position.coords.longitude;
+
+  $.getJSON(url,function(data){
+  		showResults(data);
+  });
+
+  function showResults(data){
+    $(".la-heading").html("Services available in "+ data.local_authority);
+  	$.each(data.services,function(i,obj){
+  		if(data.services[i].service_type == "advice"){
+        console.log('in advice');
+	  		info += "<ul>";
+	  		info += "<li>"+data.services[i].name+"</li>";
+	  		info += "<li>"+data.services[i].address+"</li>";
+	  		if(data.services[i].email){
+	  			info += "<li><a href=\"mailto:"+data.services[i].email+"\">Email</a></li>";
+	  		}
+	  		if(data.services[i].tel){
+	  			info += "<li><a href=\"tel:"+data.services[i].tel+"\">"+data.services[i].tel+"</a></li>";
+	  		}
+	  		info += "</ul>";
+        console.log(info);
+  		}
+  		else{
+	  		hostels += "<ul>";
+	  		hostels += "<li>"+data.services[i].name+"</li>";
+	  		hostels += "<li>"+data.services[i].address+"</li>";
+	  		if(data.services[i].email){
+	  			hostels += "<li><a href=\"mailto:"+data.services[i].email+"\">Email</a></li>";
+	  		}
+	  		if(data.services[i].tel){
+	  			hostels += "<li><a href=\"tel:"+data.services[i].tel+"\">"+data.services[i].tel+"</a></li>";
+	  		}
+	  		hostels += "</ul>";
+  		}
+  	});
+    $('#info').html(info+hostels);
+  }
+
+  //showResults(data);
+
+
+}
+
+function error(e) {
+
+}
+
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(success, error);
+} else {
+  error('not supported');
+}
+
+</script>
+</html>
