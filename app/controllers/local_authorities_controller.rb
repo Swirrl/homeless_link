@@ -8,19 +8,25 @@ class LocalAuthoritiesController < ApplicationController
 
     # 1. get local authority from lat long. Must include ONS code.
 
-    sparql_query = 'SELECT ?authority ?os ?lat ?lon ?pythag ?ons ?censusCode ?localAuthLabel where {
-       ?authority <http://opendatacommunities.org/def/local-government/governs> ?os .
-       ?authority <http://www.w3.org/2000/01/rdf-schema#label> ?localAuthLabel .
-       ?os <http://www.w3.org/2003/01/geo/wgs84_pos#lat> ?lat .
-       ?os <http://www.w3.org/2003/01/geo/wgs84_pos#long> ?lon .
-       ?authority <http://data.ordnancesurvey.co.uk/ontology/admingeo/hasCensusCode> ?censusCode .
-       ?authority <http://www.w3.org/2002/07/owl#sameAs> ?ons .
-       BIND ( (?lat - (%{lat})) AS ?latdist) .
-       BIND ( (?lon - (%{lon})) AS ?londist) .
-       BIND ( ((?latdist*?latdist) + (?londist*?londist)) AS ?pythag ) .
-    }
-    ORDER BY ASC(?pythag)
-    LIMIT 1
+    sparql_query = 'PREFIX localgov: <http://opendatacommunities.org/def/local-government/>
+      PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+      PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+      PREFIX osadmingeo: <http://data.ordnancesurvey.co.uk/ontology/admingeo/>
+      PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+      SELECT ?authority ?os ?lat ?lon ?pythag ?ons ?censusCode ?localAuthLabel where {
+        ?authority localgov:governs ?os .
+        ?authority rdfs:label ?localAuthLabel .
+        ?os geo:lat ?lat .
+        ?os geo:long ?lon .
+        ?authority osadmingeo:hasCensusCode ?censusCode .
+        ?authority owl:sameAs ?ons .
+        BIND ( (?lat - (%{lat})) AS ?latdist) .
+        BIND ( (?lon - (%{lon})) AS ?londist) .
+        BIND ( ((?latdist*?latdist) + (?londist*?londist)) AS ?pythag ) .
+      }
+      ORDER BY ASC(?pythag)
+      LIMIT 1
     '
 
     url = "http://opendatacommunities.org/sparql.json?query=#{CGI.escape(sparql_query)}&lat=#{params[:lat]}&lon=#{params[:lon]}"
